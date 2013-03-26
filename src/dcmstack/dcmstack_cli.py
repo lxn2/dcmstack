@@ -72,6 +72,10 @@ def main(argv=sys.argv):
                             'filenames based on DICOM tags. Files mapping to '
                             'the same filename will be put in the same stack. '
                             'Default: %(default)s'))
+    output_opt.add_argument('--opt-suffix', default='TE_%(EchoTime).3f', 
+                            help=("Python format string determining optional "
+                            "suffix for the output name. Only used if it "
+                            "varies between inputs. Default: %(default)s"))
     output_opt.add_argument('--output-ext', default='.nii.gz', 
                             help=('The extension for the output file type. '
                             'Default: %(default)s'))
@@ -91,9 +95,9 @@ def main(argv=sys.argv):
                            'as a three character code: (l)eft, (r)ight, '
                            '(a)nterior, (p)osterior, (s)uperior, (i)nferior. '
                            'Default: %(default)s'))
-    stack_opt.add_argument('-t', '--time-var', default=None,
+    stack_opt.add_argument('-t', '--time-var', default='AcquisitionTime',
                            help=('The DICOM tag to use for ordering the stack '
-                           'along the time dimension.'))
+                           'along the time dimension. Default: %(default)s'))
     stack_opt.add_argument('--vector-var', default=None,
                            help=('The DICOM tag to use for ordering the stack '
                            'along the vector dimension.'))
@@ -241,8 +245,8 @@ def main(argv=sys.argv):
             print "Found %d source files in the directory" % len(src_paths)
         
         #Build the stacks for this directory
-        stacks = parse_and_stack(src_paths, args.output_name, extractor, 
-                                 args.force_read, not args.strict, 
+        stacks = parse_and_stack(src_paths, args.output_name, args.opt_suffix,
+                                 extractor, args.force_read, not args.strict, 
                                  time_order=time_order, 
                                  vector_order=vector_order, 
                                  allow_dummies=args.allow_dummies, 

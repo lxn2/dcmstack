@@ -1,0 +1,10 @@
+Metadata-Version: 1.0
+Name: dcmstack
+Version: 0.6.dev
+Summary: Stack DICOM images into volumes
+Home-page: UNKNOWN
+Author: Brendan Moloney
+Author-email: moloney@ohsu.edu
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN

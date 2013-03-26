@@ -1,0 +1,8 @@
+pydicom >= 0.9.7
+nibabel
+
+[test]
+nose
+
+[doc]
+sphinx
